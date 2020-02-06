@@ -22,4 +22,4 @@ let LogsSchema = new schema ({
     }
 });
 
-module.exports = mongoose.model('usuario', LogsSchema);
+module.exports = mongoose.model('logs', LogsSchema);

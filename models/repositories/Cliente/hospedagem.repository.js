@@ -2,19 +2,11 @@ var Hosp = require('../../entitites/hospedagens.model');
 
 var HospedagemRepository = {
     FindAll: () => {
-        Hosp.find().exec((err, result) => {
-            if(err) throw err
-
-            return result
-        });
+        return Hosp.find()
     },
 
     FindOne: (id) => {
-        Hosp.findById(id).exec((err, result) => {
-            if(err) throw err;
-
-            return result
-        })
+        return Hosp.findById(id)
     },
 
     Create: (params) => {
@@ -31,7 +23,9 @@ var HospedagemRepository = {
     },
 
     Delete: (id) => {
-        Hosp.deleteOne({_id: id})
+        Hosp.findOneAndDelete({_id: id}, (err) => {
+            if(err) return console.log(err)
+        })
     }
 }
 

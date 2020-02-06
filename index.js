@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 
 //Rotas
 const teste = require('./routes/teste.route');
+const log = require('./routes/log.route');
 const cliente = require('./routes/clientes.route');
+const usuario = require('./routes/user.route');
 const hospedagem = require('./routes/hospedagem.route');
 
 const app = express();
@@ -27,6 +29,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use('/Testes', teste);
 app.use('/Cliente', cliente);
+app.use('/Usuario', usuario);
+app.use('/Log', log);
 app.use('/Hospedagem', hospedagem);
 //
 

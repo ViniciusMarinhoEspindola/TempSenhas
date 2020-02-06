@@ -6,34 +6,32 @@ var HospedagemController = {
         res.send('Olá! Isso é um Teste')
     },
 
-    list: (req, res) => {
-        let result = Hosp.FindAll()
-        res.send(result)
+    list: async (req, res) => {
+        res.send(await Hosp.FindAll())
     },
 
-    details: (req, res) => {
-        let result = Hosp.FindOne(req.params.id)
-        res.send(result)
+    details: async (req, res) => {
+        res.send(await Hosp.FindOne(req.params.id))
     },
 
     create: (req, res) => {
-        let params = {
-            nome: req.body.nome,
-            user: req.body.user,
-            senha: req.body.senha,
-            status: true,
-            obs: req.body.obs,
-            senhas: [
-                {
-                    nome: req.body.nmSenha,
-                    host: req.body.hostSenha,
-                    user: req.body.userSenha,
-                    senha: req.body.senhaSenha
-                }
-            ]
-        }
+        // let paramss = {
+        //     nome: req.body.nome,
+        //     user: req.body.user,
+        //     senha: req.body.senha,
+        //     status: true,
+        //     obs: req.body.obs,
+        //     senhas: [
+        //         {
+        //             nome: req.body.nmSenha,
+        //             host: req.body.hostSenha,
+        //             user: req.body.userSenha,
+        //             senha: req.body.senhaSenha
+        //         }
+        //     ]
+        // }
 
-        let result = Hosp.Create(params)
+        let result = Hosp.Create(req.body)
         res.send('Hospedagem cadastrada com sucesso! <br> id: ' + result._id)
     },
 
@@ -43,6 +41,7 @@ var HospedagemController = {
 
     delete: (req, res) => {
         Hosp.Delete(req.params.id)
+        res.send("Deletado com sucesso!")
     }
 }
 

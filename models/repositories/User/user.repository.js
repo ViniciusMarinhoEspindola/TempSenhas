@@ -2,24 +2,15 @@ var User = require('../../entitites/user.model');
 
 var UserRepository = {
     FindAll: () => {
-        User.find().populate('projetos.hospedagens').exec((err, result) => {
-            if(err) throw err;
-
-            console.log(result)
-            return result
-        });
+        return User.find()
     },
 
     FindOne: (id) => {
-        User.findById(id).populate('projetos.hospedagens').exec((err, result) => {
-            if(err) throw err;
-
-            return result
-        });
+        return User.findById(id)
     },
 
     Create: (params) => {
-        let user = new Cliente (params)
+        let user = new User (params)
 
         user.save((err) => {
             if (err) return console.log(err)
@@ -32,7 +23,9 @@ var UserRepository = {
     },
 
     Delete: (id) => {
-        User.deleteOne({_id: id})
+        User.findOneAndDelete({_id: id}, (err) => {
+            if(err) return console.log(err)
+        })
     }
 }
 

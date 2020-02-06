@@ -1,21 +1,12 @@
-var Cliente = require('../../entitites/clientes.model');
+const Cliente = require('../../entitites/clientes.model');
 
-var ClienteRepository = {
+const ClienteRepository = {
     FindAll: () => {
-        Cliente.find().populate('projetos.hospedagens').exec((err, result) => {
-            if(err) throw err;
-
-            console.log(result)
-            return result
-        });
+        return Cliente.find().populate('projetos.hospedagens')
     },
 
     FindOne: (id) => {
-        Cliente.findById(id).populate('projetos.hospedagens').exec((err, result) => {
-            if(err) throw err;
-
-            return result
-        });
+        return Cliente.findById(id).populate('projetos.hospedagens')
     },
 
     Create: (params) => {
@@ -32,7 +23,9 @@ var ClienteRepository = {
     },
 
     Delete: (id) => {
-        Cliente.deleteOne({_id: id})
+        Cliente.findOneAndDelete({_id: id}, (err) => {
+            if(err) return console.log(err)
+        })
     }
 }
 

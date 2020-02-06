@@ -8,7 +8,7 @@ let UserSchema = new schema ({
         max:100
     },
     email: {
-        type: Boolean,
+        type: String,
         required: "Este campo é obrigatório"
     },
     password: {
@@ -19,12 +19,12 @@ let UserSchema = new schema ({
     tipo: {
         type: Boolean,
         required: "Este campo é obrigatório",
-        default: 1
+        default: false
     },
     status: {
         type: Boolean,
         required: "Este campo é obrigatório",
-        default: 1
+        default: true
     },
     created_at: {
         type: Date,

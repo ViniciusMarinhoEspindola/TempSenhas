@@ -1,17 +1,17 @@
 //var Cliente = require('../../models/entitites/clientes.model');
-const Cliente = require('../../models/repositories/Cliente/cliente.repository')
+const User = require('../../models/repositories/User/user.repository')
 
-const ClienteController = {
+const UserController = {
     test: (req, res) => {
         res.send('Olá! Isso é um Teste');
     },
 
     list: async (req, res) => {
-        res.send(await Cliente.FindAll())
+        res.send(await User.FindAll())
     },
 
     details: async (req, res) => {
-        res.send( await Cliente.FindOne(req.params.id))
+        res.send( await User.FindOne(req.params.id))
     },
 
     create: (req, res) => {
@@ -33,18 +33,18 @@ const ClienteController = {
                 }
             ]
         }
-        let result = Cliente.Create(req.body)
-        res.send('Cliente cadastrado com sucesso! <br> id: ' + result._id)
+        let result = User.Create(req.body)
+        res.send('Usuário cadastrado com sucesso! <br> id: ' + result._id)
     },
 
     update: (req, res) => {
-        Cliente.Update(req.params.id)
+        User.Update(req.params.id)
     },
 
     delete: async (req, res) => {
-        Cliente.Delete(req.params.id)
+        User.Delete(req.params.id)
         res.send('deletado com sucesso!')
     }
 }
 
-module.exports = ClienteController;
+module.exports = UserController;
