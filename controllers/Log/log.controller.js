@@ -38,7 +38,7 @@ const LogController = {
     },
 
     update: (req, res) => {
-        Log.Update(req.params.id)
+        res.send(Log.Update(req.params.id, req.body))
     },
 
     delete: async (req, res) => {

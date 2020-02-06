@@ -19,7 +19,9 @@ var LogRepository = {
     },
 
     Update: (id, params) => {
-        Log.updateOne({_id: id})
+        Log.updateOne({_id: id}, params, { runValidators: true }, (err) => {
+            if(err) return console.log(err)
+        })
     },
 
     Delete: (id) => {

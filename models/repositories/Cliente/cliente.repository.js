@@ -19,7 +19,9 @@ const ClienteRepository = {
     },
 
     Update: (id, params) => {
-        Cliente.updateOne({_id: id})
+        Cliente.updateOne({_id: id}, params, { runValidators: true }, (err) => {
+            if(err) return console.log(err)
+        })
     },
 
     Delete: (id) => {

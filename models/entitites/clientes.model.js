@@ -29,8 +29,7 @@ let DominioSchema = new schema ({
 let ClienteSchema = new schema ({
     nome: {
         type: String,
-        required: "Este campo é obrigatório",
-        max: 150
+        required: "Este campo é obrigatório"
     },
     status: {
         type: Boolean,

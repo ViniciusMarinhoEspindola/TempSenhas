@@ -4,8 +4,7 @@ const schema = mongoose.Schema;
 let UserSchema = new schema ({
     username: {
         type: String,
-        required: "Este campo é obrigatório",
-        max:100
+        required: "Este campo é obrigatório"
     },
     email: {
         type: String,

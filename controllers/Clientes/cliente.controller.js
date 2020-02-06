@@ -38,7 +38,7 @@ const ClienteController = {
     },
 
     update: (req, res) => {
-        Cliente.Update(req.params.id)
+        res.send(Cliente.Update(req.params.id, req.body))
     },
 
     delete: async (req, res) => {

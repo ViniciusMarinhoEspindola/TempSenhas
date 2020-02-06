@@ -1,13 +1,9 @@
 var User = require('../../entitites/user.model');
 
 var UserRepository = {
-    FindAll: () => {
-        return User.find()
-    },
+    FindAll: () => User.find(),
 
-    FindOne: (id) => {
-        return User.findById(id)
-    },
+    FindOne: (id) => User.findById(id),
 
     Create: (params) => {
         let user = new User (params)
@@ -19,7 +15,10 @@ var UserRepository = {
     },
 
     Update: (id, params) => {
-        User.updateOne({_id: id})
+        let user = User.updateOne({_id: id}, params, { runValidators: true }, (err) => {
+            if(err) return console.log(err)
+        })
+        return user
     },
 
     Delete: (id) => {

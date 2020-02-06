@@ -37,8 +37,8 @@ const UserController = {
         res.send('Usuário cadastrado com sucesso! <br> id: ' + result._id)
     },
 
-    update: (req, res) => {
-        User.Update(req.params.id)
+    update: async (req, res) => {
+        res.send(await User.Update(req.params.id, req.body))
     },
 
     delete: async (req, res) => {

@@ -36,7 +36,7 @@ var HospedagemController = {
     },
 
     update: (req, res) => {
-        Hosp.Update(req.params.id)
+        res.send(Hosp.Update(req.params.id, req.body))
     },
 
     delete: (req, res) => {

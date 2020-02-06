@@ -19,7 +19,9 @@ var HospedagemRepository = {
     },
 
     Update: (id, params) => {
-        Hosp.updateOne({_id: id})
+        Hosp.updateOne({_id: id}, params, { runValidators: true }, (err) => {
+            if(err) return console.log(err)
+        })
     },
 
     Delete: (id) => {
