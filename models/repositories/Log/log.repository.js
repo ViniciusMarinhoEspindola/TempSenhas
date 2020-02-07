@@ -1,13 +1,9 @@
 var Log = require('../../entitites/logs.model');
 
 var LogRepository = {
-    FindAll: () => {
-        return Log.find()
-    },
+    FindAll: () => Log.find(),
 
-    FindOne: (id) => {
-        return Log.findById(id)
-    },
+    FindOne: (id) => Log.findById(id),
 
     Create: (params) => {
         let log = new Log (params)
