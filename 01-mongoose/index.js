@@ -14,9 +14,9 @@ const app = express();
 // BD
 const mongoose = require('mongoose');
 
-let Atlas = 'mongodb+srv://dbUser:dbPass@cluster0-fpzze.mongodb.net/test?retryWrites=true&w=majority'
+let Atlas = 'mongodb+srv://root:root123456@locallibrary-cutnw.gcp.mongodb.net/Senhas?retryWrites=true&w=majority'
 let mongoDB = 'mongodb://127.0.0.1/Teste1';
-mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.connect(Atlas, { useUnifiedTopology: true, useNewUrlParser: true })
 mongoose.Promise = global.Promise;
 
 let db = mongoose.connection;

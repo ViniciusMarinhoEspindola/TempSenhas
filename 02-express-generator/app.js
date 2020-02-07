@@ -12,7 +12,7 @@ const hospedagemRouter = require('./src/routes/hospedagem.route')
 const app = express()
 const mongoose = require('mongoose')
 
-const mongoDB = `mongodb://127.0.0.1/Teste`
+const mongoDB = `mongodb+srv://root:root123456@locallibrary-cutnw.gcp.mongodb.net/Senhas?retryWrites=true&w=majority`
 
 mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
 mongoose.Promise = global.Promise
