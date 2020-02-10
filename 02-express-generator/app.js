@@ -2,29 +2,32 @@ const path = require('path')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const sassMiddleware = require('node-sass-middleware')
-
-const testeRouter = require('./src/routes/teste.route')
-const logRouter = require('./src/routes/log.route')
-const clienteRouter = require('./src/routes/clientes.route')
-const usuarioRouter = require('./src/routes/user.route')
-const hospedagemRouter = require('./src/routes/hospedagem.route')
+const fs = require('fs');
 
 const app = express()
+
+// Rotas
+fs.readdir(path.join(__dirname + '/src/routes'), (error,files) => {
+  files.forEach((file) => app.use(require('./src/routes/' + file)))
+})
+
+// Banco
 const mongoose = require('mongoose')
 
 const mongoDB = `mongodb+srv://root:root123456@locallibrary-cutnw.gcp.mongodb.net/Senhas?retryWrites=true&w=majority`
 
 mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
 mongoose.Promise = global.Promise
-
 const db = mongoose.connection
 
 db.on('error', console.error.bind(console, 'Erro na ligação ao MongoDB'))
 
+// Views
 app.set('views', path.join(__dirname, '/src/views'))
 app.engine('html', require('ejs').renderFile)
 app.set('view engine', 'html')
 
+// Middleware
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
@@ -37,15 +40,6 @@ app.use(
   })
 )
 //app.use(express.static(path.join(__dirname, 'public')))
-
-app.use('/Testes', testeRouter)
-app.use('/Cliente', clienteRouter)
-app.use('/Usuario', usuarioRouter)
-app.use('/Log', logRouter)
-app.use('/Hospedagem', hospedagemRouter)
-app.use('/', (req, res) => {
-  res.render('index')
-})
 
 // Server
 const porta = process.env.port || 8000
