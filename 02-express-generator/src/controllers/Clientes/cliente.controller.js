@@ -15,24 +15,24 @@ const ClienteController = {
   },
 
   create: (req, res) => {
-    let params = {
-      nome: req.body.nome,
-      status: true,
-      projetos: [
-        {
-          titulo: req.body.tituloProjeto,
-          status: true,
-          hospedagens: [req.body.hospId],
-          dominio: {
-            nome: req.body.nomeDominio,
-            user: req.body.userDominio,
-            senha: req.body.senhaDominio,
-            status: true,
-            obs: req.body.obsDominio,
-          },
-        },
-      ],
-    }
+    // let params = {
+    //   nome: req.body.nome,
+    //   status: true,
+    //   projetos: [
+    //     {
+    //       titulo: req.body.tituloProjeto,
+    //       status: true,
+    //       hospedagens: [req.body.hospId],
+    //       dominio: {
+    //         nome: req.body.nomeDominio,
+    //         user: req.body.userDominio,
+    //         senha: req.body.senhaDominio,
+    //         status: true,
+    //         obs: req.body.obsDominio,
+    //       },
+    //     },
+    //   ],
+    // }
     let result = Cliente.Create(req.body)
     res.send('Cliente cadastrado com sucesso! <br> id: ' + result._id)
   },

@@ -3,6 +3,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const sassMiddleware = require('node-sass-middleware')
 const fs = require('fs');
+require('dotenv-safe').config()
 
 const app = express()
 
@@ -11,10 +12,10 @@ fs.readdir(path.join(__dirname + '/src/routes'), (error,files) => {
   files.forEach((file) => app.use(require('./src/routes/' + file)))
 })
 
+
 // Banco
 const mongoose = require('mongoose')
-
-const mongoDB = `mongodb+srv://root:root123456@locallibrary-cutnw.gcp.mongodb.net/Senhas?retryWrites=true&w=majority`
+const mongoDB = process.env.MONGO_CONNECTION || `mongodb+srv://root:root123456@locallibrary-cutnw.gcp.mongodb.net/Senhas?retryWrites=true&w=majority`
 
 mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
 mongoose.Promise = global.Promise
@@ -39,10 +40,9 @@ app.use(
     sourceMap: true,
   })
 )
-//app.use(express.static(path.join(__dirname, 'public')))
 
 // Server
-const porta = process.env.port || 8000
+const porta = process.env.PORT || 8000
 
 app.listen(porta, () => {
   console.log('Servidor na porta: ' + porta)

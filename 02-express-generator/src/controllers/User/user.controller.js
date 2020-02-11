@@ -1,5 +1,6 @@
 //var Cliente = require('../../models/entitites/clientes.model');
 const User = require('../../models/repositories/User/user.repository')
+const bcrypt = require('bcrypt')
 
 const UserController = {
   test: (req, res) => {
@@ -15,24 +16,26 @@ const UserController = {
   },
 
   create: (req, res) => {
-    let params = {
-      nome: req.body.nome,
-      status: true,
-      projetos: [
-        {
-          titulo: req.body.tituloProjeto,
-          status: true,
-          hospedagens: [req.body.hospId],
-          dominio: {
-            nome: req.body.nomeDominio,
-            user: req.body.userDominio,
-            senha: req.body.senhaDominio,
-            status: true,
-            obs: req.body.obsDominio,
-          },
-        },
-      ],
-    }
+    // let params = {
+    //   nome: req.body.nome,
+    //   status: true,
+    //   projetos: [
+    //     {
+    //       titulo: req.body.tituloProjeto,
+    //       status: true,
+    //       hospedagens: [req.body.hospId],
+    //       dominio: {
+    //         nome: req.body.nomeDominio,
+    //         user: req.body.userDominio,
+    //         senha: req.body.senhaDominio,
+    //         status: true,
+    //         obs: req.body.obsDominio,
+    //       },
+    //     },
+    //   ],
+    // }
+    let salt = bcrypt.genSaltSync(10)
+    req.body.password =  bcrypt.hashSync(req.body.password, salt)
     let result = User.Create(req.body)
     res.send('Usuário cadastrado com sucesso! <br> id: ' + result._id)
   },
