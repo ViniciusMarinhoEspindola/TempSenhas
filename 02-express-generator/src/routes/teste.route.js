@@ -7,9 +7,9 @@ const Hospedagem = require('../models/entitites/hospedagens.model')
 const TesteController = require('../controllers/teste.controller')
 
 router.get('/testar', TesteController.test)
-router.post('/create', TesteController.create)
-router.get('/:id', TesteController.details)
-router.get('/user/:id', (req, res) => {
+router.post('/t/create', TesteController.create)
+router.get('/t/:id', TesteController.details)
+router.get('/t/user/:id', (req, res) => {
   //Mongoose
   Cliente.findById(req.params.id)
     .populate('projetos.hospedagens')
