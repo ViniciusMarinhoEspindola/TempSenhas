@@ -3,7 +3,7 @@ var User = require('../../entitites/user.model')
 var UserRepository = {
   FindAll: () => User.find(),
 
-  FindOne: id => User.findById(id),
+  FindOne: param => User.findOne(param),
 
   Create: params => {
     let user = new User(params)

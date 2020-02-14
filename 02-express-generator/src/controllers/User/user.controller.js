@@ -12,7 +12,7 @@ const UserController = {
   },
 
   details: async (req, res) => {
-    res.send(await User.FindOne(req.params.id))
+    res.send(await User.FindOne({_id: req.params.id}))
   },
 
   create: (req, res) => {

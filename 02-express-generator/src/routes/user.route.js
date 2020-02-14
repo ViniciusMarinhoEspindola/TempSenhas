@@ -8,7 +8,7 @@ router.get('/Usuario/testar', UserController.test)
 router.route('/Usuario')
     .get(UserController.list)
     .post(UserController.create)
-    
+
 router.route('/Usuario/:id')
     .get(UserController.details)
     .put(UserController.update)
