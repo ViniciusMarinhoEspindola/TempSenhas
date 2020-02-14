@@ -3,8 +3,7 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const sassMiddleware = require('node-sass-middleware')
 const fs = require('fs');
-require('dotenv-safe').config({ allowEmptyValues: true })
-require('./src/config/database.config')
+require('dotenv-safe').config()
 
 const app = express()
 
@@ -12,6 +11,17 @@ const app = express()
 fs.readdir(path.join(__dirname + '/src/routes'), (error,files) => {
   files.forEach((file) => app.use(require('./src/routes/' + file)))
 })
+
+
+// Banco
+const mongoose = require('mongoose')
+const mongoDB = process.env.MONGO_CONNECTION || `mongodb+srv://root:root123456@locallibrary-cutnw.gcp.mongodb.net/Senhas?retryWrites=true&w=majority`
+
+mongoose.connect(mongoDB, { useUnifiedTopology: true, useNewUrlParser: true })
+mongoose.Promise = global.Promise
+const db = mongoose.connection
+
+db.on('error', console.error.bind(console, 'Erro na ligação ao MongoDB'))
 
 // Views
 app.set('views', path.join(__dirname, '/src/views'))
@@ -30,16 +40,6 @@ app.use(
     sourceMap: true,
   })
 )
-
-// Passport
-const passport = require('passport')
-const session = require('express-session')
-// Initialize Passport
-require('./src/auth/init.auth')(passport)
-
-app.use(session({secret: 'mySecretKey', resave: false, saveUninitialized: true}))
-app.use(passport.initialize())
-app.use(passport.session())
 
 // Server
 const porta = process.env.PORT || 8000

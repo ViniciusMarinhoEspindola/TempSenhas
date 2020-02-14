@@ -1,0 +1,21 @@
+{
+  "name": "02-express-generator",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./app.js",
+    "lint": "./node_modules/.bin/eslint"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.8",
+    "cookie-parser": "~1.4.4",
+    "dotenv-safe": "^8.2.0",
+    "ejs": "^3.0.1",
+    "express": "~4.16.1",
+    "mongoose": "^5.8.11",
+    "node-sass-middleware": "0.11.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
