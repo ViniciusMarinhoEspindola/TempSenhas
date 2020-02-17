@@ -32,7 +32,7 @@ app.use(
 );
 
 // Static Folder
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public/')));
 
 // Passport
 const passport = require('passport');
@@ -47,18 +47,7 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Handle Production
-if (process.env.NODE_ENV === 'production') {
-  // Handle Static
-  app.use(express.static(__dirname + '/public/'));
-
-  // Handle SPA
-  app.use(/.*/, (req, res) => res.sendFile(__dirname + '/public/index.html'));
-}
-
 // Server
 const porta = process.env.PORT || 8000;
 
-app.listen(porta, () => {
-  console.log('Servidor na porta: ' + porta);
-});
+app.listen(porta, () => console.log(`Servidor em: http://localhost:${porta}`));
